@@ -1,7 +1,15 @@
 FROM node:20-alpine
 WORKDIR /app
-COPY package.json .
-RUN npm install
+
+# Instalar deps primero para cachear capas
+COPY package.json package-lock.json* ./
+RUN npm install --omit=dev
+
+# Copiar código
 COPY server.js .
-EXPOSE 3000
+
+# Render redirige al puerto expuesto (recomendado 10000)
+ENV PORT=10000
+EXPOSE 10000
+
 CMD ["npm", "start"]
