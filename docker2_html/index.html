@@ -22,15 +22,16 @@
   <script>
     async function actualizar() {
       try {
+        // Llamamos a /hora en el MISMO origen; Nginx lo proxea a la API
         const r = await fetch("/hora", { cache: "no-store" });
         const d = await r.json();
         document.getElementById("hora").textContent = d.hora;
-      } catch (e) {
+      } catch {
         document.getElementById("hora").textContent = "Error cargando hora";
       }
     }
     actualizar();
-    setInterval(actualizar, 1000); // refresca cada 1s
+    setInterval(actualizar, 1000);
   </script>
 </body>
 </html>
