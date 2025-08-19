@@ -20,10 +20,11 @@
   </div>
 
   <script>
+    const API = "__API_URL__"; // el server reemplaza esto por la var de entorno
+
     async function actualizar() {
       try {
-        // Llamamos a /hora en el MISMO origen; Nginx lo proxea a la API
-        const r = await fetch("/hora", { cache: "no-store" });
+        const r = await fetch(`${API}/hora`, { cache: "no-store" });
         const d = await r.json();
         document.getElementById("hora").textContent = d.hora;
       } catch {

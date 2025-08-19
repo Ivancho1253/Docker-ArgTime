@@ -1,7 +1,10 @@
 const express = require("express");
-const app = express();
+const cors = require("cors");
 
+const app = express();
 const PORT = process.env.PORT || 10000;
+
+app.use(cors()); // permite que el HTML (otro dominio) pueda llamar
 
 app.get("/hora", (_req, res) => {
   const now = new Date();
