@@ -4,12 +4,11 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 10000;
-const API_URL = process.env.API_URL || "http://localhost:3000"; // default local
+const API_URL = process.env.API_URL || "http://localhost:3000";
 
 app.get("/", (_req, res) => {
   const tpl = fs.readFileSync(path.join(__dirname, "index.template.html"), "utf8");
-  const html = tpl.replace(/__API_URL__/g, API_URL);
-  res.type("html").send(html);
+  res.type("html").send(tpl.replace(/__API_URL__/g, API_URL));
 });
 
 app.listen(PORT, "0.0.0.0", () =>
